@@ -9,6 +9,8 @@ The Ford Model a gentle whisper through the cosmos
 First commit: 23 December 2025
 This repository timestamps 
 
+Black-hole horizon entropy as the source of dark energy
+
 the core equation that unifies gravity, quantum effects, cosmology,
 and biology through a single dynamic breathing horizon mechanism.
 The modified Einstein field equation:
