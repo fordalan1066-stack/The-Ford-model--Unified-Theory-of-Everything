@@ -5,8 +5,11 @@ Rochdale
 England
 
 The Ford Model a gentle whisper through the cosmos
+
 First commit: 23 December 2025
-This repository timestamps the core equation that unifies gravity, quantum effects, cosmology,
+This repository timestamps 
+
+the core equation that unifies gravity, quantum effects, cosmology,
 and biology through a single dynamic breathing horizon mechanism.
 The modified Einstein field equation:
 G
