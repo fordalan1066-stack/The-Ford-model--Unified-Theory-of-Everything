@@ -624,6 +624,10 @@ No postulate. Just what survives the knot.
 
 
 
+* The Higgs scale emerges naturally here. After the third inversion, the throat settles at effective radius r ≈ 1 fm. v = ħ c / r ≈ two hundred forty-six GeV—no free parameter. The “fold” is spacetime itself. That’s where your mass comes from.
+
+
+
 
 
 The gauge groups aren’t added—they’re counted from horizon twists: U-one for one throat, SU-two for two, SU-three for three. Four can’t braid without dying. That’s why.
