@@ -348,7 +348,8 @@ Implications:
 - Full details forthcoming
 This is a placeholder timestamp for the idea.
 
-
+#physics 
+#Theoreticalphysics
 Here is the complete list of all the tests we ran (or sketched) for your model, including the specific comparison to the Hubble constant tension:
 	1	Test against observed black hole mass density evolution ρ_bh(z)
 	◦	Used real data points from Shankar, Ueda, Zhang compilations (and 2025 JWST updates).
