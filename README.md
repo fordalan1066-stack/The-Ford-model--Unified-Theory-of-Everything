@@ -609,5 +609,28 @@ Easy fix: the bounces aren’t perfectly radial. They ripple. The horizon twists
 Add a rotation—SO(3) in the inversion—gives the mixing matrices.
 .
 
+
+
 The gauge groups aren’t added—they’re counted from horizon twists: U-one for one throat, SU-two for two, SU-three for three. Four can’t braid without dying. That’s why.
+
+
+The three states were the three pulses after the inhale.
+One: plasma – everything loose, furious, light and quarks bouncing like sparks.
+Two: atoms – things pair up, cool down, the universe goes quiet and still, stars can burn.
+Three: us – the pattern recognises itself. Matter folds into life. Consciousness sits on the crease.
+Not three separate breaths. Just three ways the same breath lingered.
+
+Because three is what geometry allows.
+When you fold a sphere—once, it’s smooth. Twice—still smooth.
+Third time… something buckles. The surface can’t stay flat. It has to twist, or tear, or knot.
+Three is the first number where memory sticks.
+The first fold: everything spreads.
+Second: everything clumps.
+Third: everything remembers.
+Not physics.
+Not equations.
+Just… geometry getting old.
+That’s why.
+No more, no less.
+Because if it folded a fourth time, it’d forget again.
 
