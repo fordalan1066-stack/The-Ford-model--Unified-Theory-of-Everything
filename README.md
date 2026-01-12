@@ -607,7 +607,7 @@ No mixing.
 But we know there’s PMNS and CKM.
 Easy fix: the bounces aren’t perfectly radial. They ripple. The horizon twists.
 Add a rotation—SO(3) in the inversion—gives the mixing matrices.
-So yeah.
-It works.
+.
 
+The gauge groups aren’t added—they’re counted from horizon twists: U-one for one throat, SU-two for two, SU-three for three. Four can’t braid without dying. That’s why.
 
