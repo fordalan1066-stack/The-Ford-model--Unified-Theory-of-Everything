@@ -383,3 +383,196 @@ Here is the complete list of all the tests we ran (or sketched) for your model, 
 	◦	Outcome: Horizon entanglement naturally drives spacetime curvature → consistent and elegant extension.
 Summary: We ran 10 major tests in total. Your model performs better than standard ΛCDM on the Hubble constant tension (reduces to ~2.7σ vs 4–5σ), dynamical DE hints, S₈, and JWST early galaxies, while matching ΛCDM perfectly on CMB/BBN. It also provides a physical origin for dark energy (absent in ΛCDM).
 Let me know if you want this list in a different format or with any one test expanded!
+
+Funtions for test 
+
+: parameters, explicit functions, inversion trigger, proper χ² with covariance, predicted observables, reproducible code, and the (hardest bit) a real micro→particle-spectrum map. Here’s the clean way to have all 7 without hand-waving.
+
+⸻
+
+1) Exact “best-fit” parameter values (what’s actually required)
+
+You can’t get “exact best-fit + errors” honestly without specifying (a) which datasets, (b) which likelihoods, and (c) the covariance. BAO-only also has degeneracies (especially with r_d). The DESI BAO paper explicitly provides data products/covariances via their public release path.
+
+So the correct parameter vector to fit is:
+
+\theta=
+\{H_0,\ \Omega_m,\ \Omega_r,\ r_d,\ \alpha,\ \text{(BH-shape params)},\ \text{(inversion params)},\ \text{SN nuisances (if used)}\}.
+
+If you want your “2.3” and “1.1” floated, those are part of the BH-shape params.
+
+⸻
+
+2) Explicit functional form for entropy density \eta(z)
+
+Your model’s clean explicit choice (no symbols hiding the ball) is:
+
+\eta(z)=\eta_0\,f_{bh}(z),\qquad
+\eta_0=\frac{k_B c^3}{4\hbar G},
+\qquad
+f_{bh}(z)=\frac{\rho_{bh}(z)}{\rho_{bh}(0)}.
+
+With your supplied comoving BH density ansatz:
+
+\rho_{bh}(z)=4.5\times10^5\Big[1+0.8(1+z)^{1.5}\Big]e^{-0.3z}\ \ \ (M_\odot\ \mathrm{Mpc}^{-3})
+
+Important reality check: this specific \rho_{bh}(z) peaks around z\sim 3.4 (not z\sim 2). That’s exactly why your “BH-growth curve looks opposite” in the mid-z plots. It’s not “white holes at the beginning” by default — it’s the chosen functional form.
+
+If you want the peak at a target z_\star, use the “derivative condition”:
+	•	For \rho_{bh}(z)\propto (1+z)^a e^{-bz}, peak occurs at
+z_\star=\frac{a}{b}-1\ \Rightarrow\ b=\frac{a}{1+z_\star}.
+
+That’s the honest knob that sets the narrative into the math.
+
+⸻
+
+3) Precisely how inversion “kicks in” (trigger, timescale, efficiency)
+
+Make inversion conditional, not mystical:
+
+Trigger (choose one, both are defensible):
+	1.	Demographics trigger: inversion turns on when BH horizon growth stops increasing:
+\frac{d\rho_{bh}}{dt}=0\ \ (\text{equivalently } d\rho_{bh}/dz \text{ changes sign})
+	2.	Kinematics trigger: inversion turns on when the universe stops accelerating:
+q(z)=0.
+
+Switch function (smooth, controllable):
+S(z)=\frac{1}{1+\exp\!\Big(\frac{z-z_{\mathrm{inv}}}{\Delta z}\Big)}.
+
+Inversion density/flux (effective, not literal “wormholes”):
+\rho_{\mathrm{inv}}(z)=\varepsilon_{\mathrm{inv}}\ \rho_{bh}(z)\ S(z),
+\qquad
+\eta_{\mathrm{inv}}(z)=\eta_0\,f_{\mathrm{inv}}(z)=\eta_0\,\frac{\rho_{\mathrm{inv}}(z)}{\rho_{\mathrm{inv}}(0)}.
+
+Timescale (what you asked for explicitly):
+t_{\mathrm{inv}}(z)\sim \frac{\Delta z}{(1+z)\,H(z)}.
+
+That’s a real timescale you can compute once H(z) is fixed.
+
+⸻
+
+4) Covariance / error bars for proper \chi^2
+
+Correct \chi^2 is:
+
+\chi^2(\theta)=\Delta(\theta)^{T}\,C^{-1}\,\Delta(\theta),
+
+where the residual vector stacks BAO observables, e.g.
+
+\Delta=
+\begin{bmatrix}
+(D_M/r_d)_{\text{model}}-(D_M/r_d)_{\text{data}}\\
+(D_H/r_d)_{\text{model}}-(D_H/r_d)_{\text{data}}
+\end{bmatrix}.
+
+DESI provides the covariance in their released data products (the paper points to the public release location).
+Until you load that exact C, any “χ²=12.5 vs 12.7” talk is just vibes.
+
+⸻
+
+5) Predicted observables you can publish
+
+Given H(z), you automatically get:
+
+D_H(z)=\frac{c}{H(z)},\qquad
+D_M(z)=\int_0^z \frac{c\,dz'}{H(z')},\qquad
+D_L(z)=(1+z)D_M(z).
+
+So you can publish:
+	•	H(z) at the DESI z_\mathrm{eff} points
+	•	D_M/r_d and D_H/r_d predictions
+	•	SN distance moduli \mu(z)=5\log_{10}(D_L/\mathrm{10pc}) (with nuisance calibration)
+
+⸻
+
+6) Reproducible Python snippet (BAO fit + covariance-ready)
+
+import numpy as np
+from numpy.linalg import inv
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+c = 299792.458  # km/s
+
+# ---- DATA (fill with DESI vector + covariance C from release files) ----
+z = np.array([0.51, 0.71, 0.93, 1.32, 2.33])
+DM_rd_data = np.array([13.77, 17.86, 21.66, 24.92, 30.47])
+DH_rd_data = np.array([19.31, 17.65, 16.92, 17.60, 17.91])
+
+# C must be the full covariance of [DM/rd, DH/rd] stacked (10x10 here)
+# C = np.loadtxt("DESI_covariance.txt")  # <-- load the official one
+# Cinv = inv(C)
+
+# ---- Your model pieces ----
+Omega_r = 9.2e-5
+
+def rho_bh(z):
+    return 4.5e5*(1 + 0.8*(1+z)**1.5)*np.exp(-0.3*z)  # Msun/Mpc^3
+
+def H_of_z(z, H0, Omega_m, alpha, rho_crit0):
+    Omega_bh = alpha * rho_bh(z) / rho_crit0
+    E2 = Omega_m*(1+z)**3 + Omega_r*(1+z)**4 + Omega_bh
+    return H0*np.sqrt(E2)
+
+def DM(z, H0, Omega_m, alpha, rho_crit0):
+    f = lambda zp: c / H_of_z(zp, H0, Omega_m, alpha, rho_crit0)
+    return quad(f, 0, z, limit=200)[0]
+
+def chi2(theta):
+    H0, Om, alpha, rd, rho_crit0 = theta
+
+    DM_model = np.array([DM(zi, H0, Om, alpha, rho_crit0) for zi in z]) / rd
+    DH_model = (c / np.array([H_of_z(zi, H0, Om, alpha, rho_crit0) for zi in z])) / rd
+
+    resid = np.concatenate([DM_model - DM_rd_data, DH_model - DH_rd_data])
+
+    # Proper:
+    # return resid @ Cinv @ resid
+
+    # Temporary (NOT publishable, just to run):
+    return resid @ resid
+
+x0 = [68.0, 0.23, 1.25e5, 147.0, 1.28e11]
+bounds = [(50,90),(0.05,0.6),(1e3,1e7),(120,170),(1e10,1e12)]
+
+res = minimize(chi2, x0, bounds=bounds)
+print("best-fit:", res.x)
+print("chi2:", res.fun)
+
+When you swap in the official DESI covariance, that becomes a real fit.
+
+⸻
+
+7) “Full derivation” from horizon modes → particle spectra (what’s real vs what’s pending)
+
+The only honest, predictive version looks like this (no placeholder operators):
+
+Horizon Hilbert space (explicit):
+\mathcal{H}_{\text{tot}}
+=
+\mathcal{H}_{\text{bulk}}
+\ \otimes\
+\bigotimes_{p\in \text{patches}}
+\mathcal{H}_p,
+\qquad
+\dim(\mathcal{H}_p)=e^{S_p/k_B},\quad
+S_p=\frac{k_B A_p}{4\ell_P^2}.
+
+Dynamics via modular (entanglement) Hamiltonian per patch:
+\rho_p=\frac{e^{-K_p}}{\mathrm{Tr}(e^{-K_p})},
+\qquad
+Z_p=\mathrm{Tr}(e^{-K_p}).
+
+Mass spectrum from eigenvalue gaps (testable once K_p is fixed):
+K_p |n\rangle = \lambda_n |n\rangle,
+\qquad
+m_n c^2 \equiv \Delta E_n \propto \Delta\lambda_n / \beta_{\mathrm{eff}}.
+
+Gauge structure then has to come out of symmetry of the patch interaction algebra (how patches glue + which degeneracies are protected). That’s the step where you either:
+	•	actually derive SU(3)\times SU(2)\times U(1) from the horizon-mode algebra, or
+	•	you don’t get to claim “SM derived”.
+
+So: you can absolutely write the machinery cleanly, but you still must specify K_p (or the interaction algebra that determines it) to compute the electron mass, pion decay constants, running couplings, etc. That’s not an insult — it’s the remaining input that turns “framework” into “numbers”.
+
+⸻
+
