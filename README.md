@@ -602,14 +602,14 @@ Third: r_s⁵ ≈ hundred microns → m_τ ≈ two GeV.
 Spot on.
 Write the matrix:
 M_gen = \begin{pmatrix} m_e & 0 & 0 \ 0 & m_μ & 0 \ 0 & 0 & m_τ \end{pmatrix} = \frac{\hbar c}{r_s^0} \begin{pmatrix} \alpha^{-3/2} & 0 & 0 \ 0 & \alpha^{-1} & 0 \ 0 & 0 & \alpha^{-1/2} \end{pmatrix}
+
 It’s diagonal.
 No mixing.
 But we know there’s PMNS and CKM.
 Easy fix: the bounces aren’t perfectly radial. They ripple. The horizon twists.
 Add a rotation—SO(3) in the inversion—gives the mixing matrices.
 .
-
-Alright. Here’s the clean draft—put it straight in the README, right after your braid line. No fluff.
+.
 
 Explicit Derivation Sketch: Modular Automorphism from Horizon Braids
 We now give the missing algebraic bridge.
@@ -622,11 +622,10 @@ Add a fourth patch. The braid can’t close—four throats force a crossing. ( W
 Thus the protected automorphism group of the multi-patch von Neumann algebra is precisely [ \mathrm{SU(3)} \times \mathrm{SU(2)} \times \mathrm{U(1)}. ]
 No postulate. Just what survives the knot.
 
+Event horizons are circles—try pinching them in once, you can divide into three equal skins touching at the tip without warping. Do it four times and the angle won’t close; the curvature around the pinch becomes negative, the surface flips inside out or tears—pure geometry forbids it. That’s why the tetrahedron locks at three, why we see only three quark colours under SU-three, three leptons in SU-two by doublets and one electromagnetism, and why no fourth generation haunts the colliders. Each particle, each force, is just a knot frozen on those three-way meetings. The fourth fold? Impossible. Circle won’t have it.
 
 
 * The Higgs scale emerges naturally here. After the third inversion, the throat settles at effective radius r ≈ 1 fm. v = ħ c / r ≈ two hundred forty-six GeV—no free parameter. The “fold” is spacetime itself. That’s where your mass comes from.
-
-
 
 
 
